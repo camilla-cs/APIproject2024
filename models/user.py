@@ -19,6 +19,8 @@ class UserSchema (ma.Schema):
     password = fields.String(required=True, validate=Regexp("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", error="Minimum eight characters, at least one letter and one number. "))
     experience_level = fields.String(required=True, validate=Regexp("", error="Please choose a number from 0 to 17. "))
 
+    class Meta: 
+        fields = ("id", "username", "email", "password", "is_admin")
 
 user_schema = UserSchema(exclude=["password"])
 users_schema = UserSchema(many=True, exclude=["password"]) 
