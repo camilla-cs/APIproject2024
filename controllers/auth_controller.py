@@ -1,6 +1,10 @@
+from datetime import timedelta
+
 from flask import Blueprint, request
 from sqlalchemy.exc import IntegrityError
 from psycopg2 import errorcodes
+
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from init import bcrypt, db
 from models.user import User, user_schema
@@ -37,5 +41,17 @@ def register_user():
             return {"error":"email address already in use"}, 409
 
 
+@auth_bp.route("/login", methods=["POST"])
+def login_user():
+    body_data = request.get_json()
+    stmt = db.select(User).filter_by(email=body_data.get("email"))
+    user = db.session.scalar(stmt) 
 
+    if user and  bcrypt.check_password_hash (user.password, body_data.get("password")) : 
+        token = create_access_token(identity=str(user.id),expires_delta=timedelta(days=1))
+        return {"email":user.email, "is_admin":user.is_admin, "token":token}
+    
+    else:
+        return {"error":"Incorrect email or password."}, 401 
+    
     
