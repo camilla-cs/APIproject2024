@@ -4,6 +4,7 @@ from flask import Blueprint
 
 from init import db, bcrypt
 from models.user import User
+from models.post import Post
 
 db_commands = Blueprint("db", __name__)
 
@@ -37,7 +38,27 @@ def seed_tables():
         )
     ]
 
+
     db.session.add_all(users)
+ 
+
+    posts = [
+        Post(
+            content="Next event will be revealed soon!",
+            date=date.today(),
+            user=users[0]
+        ),
+
+        Post(
+            content="Going at Sydney rock climbing gym in St.Peters with some friends this weekend, feel free to join us!!",
+            date=date.today(),
+            user=users[1]
+        ),
+
+       
+    ]
+    
+    db.session.add_all(posts)
     db.session.commit()
 
     print("Tables seeded")
