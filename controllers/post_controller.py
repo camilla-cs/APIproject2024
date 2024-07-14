@@ -53,7 +53,7 @@ def delete_post(id):
     if post: 
         db.session.delete(post)
         db.session.commit()
-        return {"message": f"Post '{id}' deleted successfully"}
+        return {"message": f"Post {id} deleted successfully"}
     else:
         return {"error": f"Post with id {id} not found"}, 404 
     

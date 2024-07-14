@@ -31,5 +31,8 @@ def create_app():
     from controllers.post_controller import posts_bp
     app.register_blueprint(posts_bp)
 
+    from controllers.event_controller import events_bp
+    app.register_blueprint(events_bp)
+
     return app 
 
