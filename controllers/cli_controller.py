@@ -5,6 +5,10 @@ from flask import Blueprint
 from init import db, bcrypt
 from models.user import User
 from models.post import Post
+from models.event import Event
+from models.location import Location 
+
+
 
 db_commands = Blueprint("db", __name__)
 
@@ -59,6 +63,47 @@ def seed_tables():
     ]
     
     db.session.add_all(posts)
+
+    events = [
+        Event(
+            title="Winter is coming.",
+            date=date.today(),
+            description="A nice weekend in the cold Perisher Valley! For more info see the instagram page.",
+            difficulty_level= 17,
+            location_id="1",
+            is_admin=True
+        ),
+
+        Event(
+            title="Beginner Climbing Session",
+            date=date.today(),
+            description="A session for beginners to get started with climbing.",
+            difficulty_level=0,
+            location_id="2",
+            is_admin=True
+        )
+    ]
+    
+    db.session.add_all(events)
+   
+
+    locations = [
+        Location (
+            name = "Perisher Valley",
+            address="-36.396624,148.405136",
+            difficulty_level=5
+        ),
+
+        Location (
+            name="BlocHaus Bouldering Sydney",
+            address="49 Fitzroy St, Marrickville NSW 2204",
+            difficulty_level=0
+        )
+    ]
+
+    db.session.add_all(locations)
+
+
     db.session.commit()
 
     print("Tables seeded")
