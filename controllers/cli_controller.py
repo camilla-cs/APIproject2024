@@ -1,6 +1,7 @@
 from datetime import date
 
 from flask import Blueprint
+from sqlalchemy import text
 
 from init import db, bcrypt
 from models.user import User
@@ -19,8 +20,15 @@ def create_tables():
 
 @db_commands.cli.command("drop")
 def drop_tables():
-    db.drop_all()
-    print("Tables dropped") 
+    try:
+        db.session.execute(text('DROP TABLE IF EXISTS event_user CASCADE'))
+        db.session.execute(text('DROP TABLE IF EXISTS events CASCADE'))
+        db.session.execute(text('DROP TABLE IF EXISTS users CASCADE'))
+        db.session.commit()
+        print("Tables dropped successfully.")
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error dropping tables: {e}")
 
 
 @db_commands.cli.command("seed")

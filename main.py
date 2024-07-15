@@ -34,5 +34,8 @@ def create_app():
     from controllers.event_controller import events_bp
     app.register_blueprint(events_bp)
 
+    from controllers.event_user_controller import eventuser_bp
+    app.register_blueprint(eventuser_bp)
+
     return app 
 

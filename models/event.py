@@ -15,6 +15,7 @@ class Event (db.Model):
 
     location = db.relationship("Location", back_populates="events")
 
+    participants= db.relationship("User", secondary="event_user",backref=db.backref('events_partecipating', lazy='dynamic'))
 
 class EventSchema(ma.Schema):
     location = fields.Nested("LocationSchema", only=["name","address"])

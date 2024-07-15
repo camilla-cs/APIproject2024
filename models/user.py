@@ -2,6 +2,9 @@ from init import db, ma
 from marshmallow import fields
 from marshmallow.validate import Regexp, Range
 
+from models.event import Event,event_schema,events_schema
+from models.event_user import EventUser
+
 class User(db.Model): 
     __tablename__="users"
     id = db.Column(db.Integer, primary_key=True) 
@@ -14,6 +17,10 @@ class User(db.Model):
 
     #to connect to post model 
     posts = db.relationship('Post', back_populates="user")
+    #to connect to event model 
+    events=db.relationship("Event",secondary="event_user",backref="users",cascade="all,delete")
+
+
 
 
 class UserSchema (ma.Schema): 
