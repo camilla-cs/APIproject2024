@@ -25,7 +25,11 @@ Please follow the steps below taking into consideration that were run on a MacOS
 
 1. Clone the API from the GitHub repository to your local machine. 
 2. Open the terminal 
-3. Run 'python3 -m venv .venv'
-4. Run 'source .venv/bin/activate'
-5. To install the required libraries run 'pip3 install -r requirements.txt' into your terminal. 
-6. 
+3. Run `python3 -m venv .venv`
+4. Run `source .venv/bin/activate`
+5. To install the required libraries run `pip3 install -r requirements.txt` into your terminal. 
+6. Create a .env file and set your database URI and secret key. 
+7. Run `flask db create` to create the tables. 
+8. Run `flask db seed `.
+9. Run `flask run` to start the server on http://localhost:8080 
+
