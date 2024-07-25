@@ -13,10 +13,10 @@ API webserver created for Coder Academy T2A2 assignment.
 - [R2: Tracking the tasks](#r2-tracking-the-tasks)
 - [R3: Packages](#r3-packages)
 - [R4: Benefits and drawback of the database's system](#r4-benefits-and-drawback-of-the-databases-system)
-- [R5: ORM]
-- [R6: ERD]
-- [R7: Model and database relationship]
-- [R8: Application's Endpoints]
+- [R5: ORM](#r5-orm)
+- [R6: ERD](#r6-erd)
+- [R7: Models and database relationship](#r7-models-and-database-relationship)
+- [R8: Application's Endpoints](#r8-application's-endpoints)
 
 
 ## API Setup
@@ -54,7 +54,7 @@ First thing I focused on was the ERD diagram, essential for starting the coding 
 
 Then the last thing that remained was the documentation part and making sure I would meet all the requirements. 
 
---> screenshots 
+!!! --> screenshots !!! 
 
  ## R3: Packages
 
@@ -115,4 +115,35 @@ Slower performance compared to SQL Server and MySQL
 can be complex for beginners. 
 #### memory usage 
 can have a substantial impact on memory and CPU usage, as a consequence, it requires powerful hardware. 
+
+## R5 : ORM 
+The ORM language used for this project is SQLAlchemy.
+
+Object-relational mapping allows developers to convert data between the database and the programming language used, and is based on abstraction, through wich developers don't need to know SQL to generate SQL queries. 
+
+In this project it is used to facilitate the interaction between Python and the database. 
+
+The key features are: 
+- Mapping : by using Python classes to define database schema we are able to map the class attributes to the database table columns. This allows me to define the database schema in Python language. 
+- CRUD operations are performed more easily thanks to a high-level query interface that allows for complex queries using Python functions. 
+- It supports the definitioin of relationships between tables, allowing complex data relationship using Python code so that data manipulation and retrieval is easier. 
+- it can create automatically database schema without needing to write SQL for generating tables. 
+
+The ORM makes the code more readable and clear across different platforms, easier to maitain since we don't need to write SQL queries inside the code. Many ORM tools have the advantage of  reducing time and improving the overall performance by implementing automatic common tasks such as creating, uptading and deleting, validating and managing data. 
+
+
+
+## R6: ERD
+
+![ERD Diagram](/docs/api_2024.drawio.png)
+
+Based on this ERD diagram we can have an idea of the tables and relationships of the API. 
+
+Starting from the top left we have  'User' table which is linked to 'Post' table by a one-to-many relationship. This means that one and only one user will be able to create posts , or none at all. 
+
+Between 'User' and 'Event' table there is a many-to-many relationship so a join table named 'EventUser' is created. One User can partecipate at many events, at the same time one event can have many users. This allows the admin to see which users will be attending which event. 
+
+Finally, a one-to-many relationship takes place between 'Event' and 'ClimbingSpot' tables, where in one location can take place many events, but one event can have one and only one climbing location happening. 
+
+## R7: Models and database relationships 
 
