@@ -231,11 +231,11 @@ class Location(db.Model):
     name= db.Column(db.String,nullable=False)
     address=db.Column(db.String,nullable=False)
     difficulty_level= db.Column(db.Integer, nullable=False)
-    event_id= db.Column(db.Integer, db.ForeignKey("events.event_id"),nullable=False)
+    
 
     events= db.relationship("Event", back_populates="location")
 ```
-The presence of event_id reminds us of the one-to-many relationship with Event model. 
+ 
 
 The use of foreign key constraints ensure that the relationships between tables are maintained , for example an event must be linked to a valid location and the participants partecipanting at events must be registered users.
 
