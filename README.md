@@ -21,16 +21,23 @@ API webserver created for Coder Academy T2A2 assignment.
 
 ## API Setup
 
-Please follow the steps below taking into consideration that were run on a MacOS operating system. 
+Please follow the steps below taking into consideration that were run on a MacOS operating system and Insomnia was used to run the server. 
 
 1. Clone the API from the GitHub repository to your local machine. 
-2. Open the terminal 
-3. Run `python3 -m venv .venv`
-4. Run `source .venv/bin/activate`
-5. To install the required libraries run `pip3 install -r requirements.txt` into your terminal. 
-6. Create a .env file and set your database URL and secret key based on this example: 
 
--- mettere di creare user e database
+2. Open the terminal of choice. 
+
+3. Run `python3 -m venv .venv` to create a virtual environment. 
+
+4. Run `source .venv/bin/activate` to active the virtual environment. 
+
+5. To install all the required packages run `pip3 install -r requirements.txt` into your terminal. 
+
+6. Create a  separate .env file in the */src* folder and set your database URL and secret key based on the `.env.sample` file. 
+
+7. Make sure you have installed and run PostgreSQL in the terminal. In case you don't have postgreSQL installed, run this command in the terminal: 
+`pip install flask`
+
 7. Run `flask db create` to create the tables. 
 8. Run `flask db seed `.
 9. Run `flask run` to start the server on http://localhost:8080 
