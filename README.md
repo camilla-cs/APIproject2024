@@ -28,7 +28,9 @@ Please follow the steps below taking into consideration that were run on a MacOS
 3. Run `python3 -m venv .venv`
 4. Run `source .venv/bin/activate`
 5. To install the required libraries run `pip3 install -r requirements.txt` into your terminal. 
-6. Create a .env file and set your database URI and secret key. 
+6. Create a .env file and set your database URL and secret key based on this example: 
+
+-- mettere di creare user e database
 7. Run `flask db create` to create the tables. 
 8. Run `flask db seed `.
 9. Run `flask run` to start the server on http://localhost:8080 
@@ -124,10 +126,10 @@ Object-relational mapping allows developers to convert data between the database
 In this project it is used to facilitate the interaction between Python and the database. 
 
 The key features are: 
-- Mapping : by using Python classes to define database schema we are able to map the class attributes to the database table columns. This allows me to define the database schema in Python language. 
-- CRUD operations are performed more easily thanks to a high-level query interface that allows for complex queries using Python functions. 
-- It supports the definitioin of relationships between tables, allowing complex data relationship using Python code so that data manipulation and retrieval is easier. 
-- it can create automatically database schema without needing to write SQL for generating tables. 
+- **Mapping** : by using Python classes to define database schema we are able to map the class attributes to the database table columns. This allows me to define the database schema in Python language. 
+- **CRUD operations** are performed *more easily* thanks to a high-level query interface that allows for complex queries using Python functions. 
+- It supports the definition of *relationships between tables*, allowing complex data relationship using Python code so that data manipulation and retrieval is easier. 
+- it can *create automatically database schema* without needing to write SQL for generating tables. 
 
 The ORM makes the code more readable and clear across different platforms, easier to maitain since we don't need to write SQL queries inside the code. Many ORM tools have the advantage of  reducing time and improving the overall performance by implementing automatic common tasks such as creating, uptading and deleting, validating and managing data. 
 
@@ -143,7 +145,105 @@ Starting from the top left we have  'User' table which is linked to 'Post' table
 
 Between 'User' and 'Event' table there is a many-to-many relationship so a join table named 'EventUser' is created. One User can partecipate at many events, at the same time one event can have many users. This allows the admin to see which users will be attending which event. 
 
-Finally, a one-to-many relationship takes place between 'Event' and 'ClimbingSpot' tables, where in one location can take place many events, but one event can have one and only one climbing location happening. 
+Finally, one-to-many relationship takes place between 'Event' and 'Location' tables, where in one location can take place many events, but one event can have one and only one climbing location happening. --> RIGUARDA !!  
 
 ## R7: Models and database relationships 
 
+Each model has a separate file in the models folder and they are the following: 
+
+#### - User Model
+```python
+class User(db.Model): 
+    __tablename__="users"
+    id = db.Column(db.Integer, primary_key=True) 
+    username = db.Column(db.String)
+    email = db.Column(db.String, nullable=False, unique=True) 
+    experience_level= db.Column(db.Integer, nullable=False)
+    bio = db.Column(db.String, nullable=True)
+    password = db.Column (db.String,nullable=False)
+    is_admin= db.Column (db.Boolean,default=False) 
+
+    #to connect to post model 
+    posts = db.relationship('Post', back_populates="user")
+    #to connect to event model 
+    events=db.relationship("Event",secondary="event_user",backref="users",cascade="all,delete")
+
+```
+The **User model** represents the users table in the database and it relates to the **Post model** through a *one-to-many* relationship, but also to the **event model** with a *many-to-many* relationship that is taken care by a join table called **EventUser** . 
+
+#### - Post Model 
+```python
+class Post(db.Model):
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer, primary_key=True)
+    content= db.Column(db.String,nullable=False)
+    date = db.Column(db.Date)
+    #foreign key
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+
+    #to get info about the user
+    user = db.relationship('User', back_populates='posts')
+
+```
+The **Post model** contains the user_id as foreign key to link every post that has been created to its own owner, but you'll also be able to get information about the user's personal details such as *id*,*email* and *username*. 
+
+#### - Event Model
+```python
+class Event (db.Model): 
+    __tablename__="events"
+
+    event_id= db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    date= db.Column(db.Date)
+    description= db.Column(db.String,nullable=False)
+    difficulty_level= db.Column(db.Integer, nullable=False)
+    is_admin= db.Column (db.Boolean,default=False)
+    location_id= db.Column(db.Integer, db.ForeignKey("locations.location_id"),nullable=False)
+
+    location = db.relationship("Location", back_populates="events")
+
+    participants= db.relationship("User", secondary="event_user",backref=db.backref('events_partecipating', lazy='dynamic'))
+```
+As we can see in the model above, only an admin can create an event, and there's also a foreign key called location_id that links this model to the **Location model** through a one-to-many relationship. 
+The admin can also retrieve information about the location details as well as the partecipants that are gonna join the event through the EventUser table as seen below. 
+
+#### - EventUser Model 
+
+```python
+#join-table between users and events 
+class EventUser(db.Model):
+    __tablename__="event_user"
+    event_user=db.Table("event_user",
+                            db.Column("event_id",db.Integer,db.ForeignKey("events.event_id"), primary_key=True),
+                            db.Column("user_id",db.Integer,db.ForeignKey("users.id"), primary_key=True)
+)
+
+```
+This join-table allow the admin to see to which event users will join and all the details not only about the event and the user, but also the location's ones. 
+
+#### - Location Model 
+```python
+class Location(db.Model): 
+    __tablename__= "locations"
+
+    location_id= db.Column(db.Integer, primary_key=True)
+    name= db.Column(db.String,nullable=False)
+    address=db.Column(db.String,nullable=False)
+    difficulty_level= db.Column(db.Integer, nullable=False)
+    event_id= db.Column(db.Integer, db.ForeignKey("events.event_id"),nullable=False)
+
+    events= db.relationship("Event", back_populates="location")
+```
+The presence of event_id reminds us of the one-to-many relationship with Event model. 
+
+The use of foreign key constraints ensure that the relationships between tables are maintained , for example an event must be linked to a valid location and the participants partecipanting at events must be registered users.
+
+This also allows data consistency and integrity but also facilitates querying of the database. For instance the API can easily fetch all the posts a user has created or retrieve all the partecipants of a specific event using the join-table EventUser. The creation of a join-table helps normalize the database , reducing data redundancy and ensuring a clear structure of the data, which will make the database's maintainance easier. 
+
+The relationships between models also ensure flexibility in managing the data, as new locations can be added without affecting the events, and users can join or delete the partecipation to an event without damaging the other data. So, this scalability is crucual as the number of users and events grows. 
+
+In conclusion, the clear relationships between models make managing data more straightforward and easy to implement updates or changes. 
+
+
+## R8: Application's Endpoints
