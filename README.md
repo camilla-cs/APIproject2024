@@ -247,3 +247,351 @@ In conclusion, the clear relationships between models make managing data more st
 
 
 ## R8: Application's Endpoints
+
+#### Register New User
+ This route allows to register a user's account in order to login. 
+
+**POST** method /auth/register
+
+
+Body request example: 
+```JSON
+{
+	"username":"Han Solo",
+	"email":"hansolo@email.com",
+	"experience_level":10,
+	"password":"1234"
+}
+```
+Response example:
+ ```JSON
+ {
+	"id": 3,
+	"username": "Han Solo",
+	"email": "hansolo@email.com",
+	"experience_level": 10,
+	"bio": null,
+	"is_admin": false,
+	"posts": []
+}
+ 
+ ```
+
+#### Login 
+This allows user and admin to login, it will also give a Token (valid temporary) necessary to user to create, delete or edit a post, and for admin to create, delete, modify events as well as seeing the events' participants. 
+
+**Login** method /auth/login 
+
+Body request example: 
+```JSON
+{
+	"email": "jonsnow@email.com",
+	"password":"snow"
+}
+
+```
+
+Response example: 
+```JSON
+{
+	"email": "jonsnow@email.com",
+	"is_admin": false,
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMTk5MjUxNywianRpIjoiMTQxNzY5OWQtNzJlNi00OTIyLWE3YTMtOTAxZWFlMzc3ZGNlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjIiLCJuYmYiOjE3MjE5OTI1MTcsImNzcmYiOiIyOWVkNzFhNy0zNTRmLTQ0NDUtOGU1ZC03NTllMmJmNzAzYjgiLCJleHAiOjE3MjIwNzg5MTd9.a_FdipgHR-6_fJKpP8YyOZyt6nuXIFGHTiwE6PyCzrw"
+}
+```
+
+#### Retrieve all posts
+
+This route allows us to retrieve information about the posts created.
+
+**GET** method /posts
+ 
+ Body request: 
+ Not needed 
+
+Response example: 
+```JSON
+[
+	{
+		"user": {
+			"id": 1,
+			"username": null,
+			"email": "admin@email.com"
+		},
+		"content": "Next event will be revealed soon!",
+		"date": "2024-07-14"
+	},
+	{
+		"user": {
+			"id": 2,
+			"username": "Jon Snow",
+			"email": "jonsnow@email.com"
+		},
+		"content": "Going at Sydney rock climbing gym in St.Peters with some friends this weekend, feel free to join us!!",
+		"date": "2024-07-14"
+	}
+]
+
+```
+
+#### Create New Post
+
+**POST** method /posts
+
+For this request is necessary a Token, that will be inserted in the Auth parameter, where 'Bearer Token' is selected.
+
+Body request example: 
+```JSON
+{
+	"content":"Does anyone know a good climbing spot for beginners?"
+}
+
+```
+
+Response example: 
+```JSON
+{
+	"user": {
+		"id": 3,
+		"username": "Han Solo",
+		"email": "hansolo@email.com"
+	},
+	"content": "Does anyone know a good climbing spot for beginners?",
+	"date": "2024-07-13"
+}
+```
+
+#### Delete Post
+
+Token of the user required. 
+
+**DEL** method /posts/{post_id}
+
+Body request: 
+Not necessary
+
+Response example: 
+```JSON
+{
+    "message": "Post '{id}' deleted successfully"
+
+}
+
+```
+#### Edit Post
+
+Token required. 
+
+**PATCH** method /posts/1 
+
+Body request example: 
+```JSON
+{
+	"content":"The new event location will be at the Blue Mountains! Keep in touch to hear more info!"
+}
+```
+
+Response example: 
+```JSON
+{
+	"user": {
+		"id": 1,
+		"username": null,
+		"email": "admin@email.com"
+	},
+	"content": "The new event location will be at the Blue Mountains! Keep in touch to hear more info!",
+	"date": "2024-07-15"
+}
+```
+
+#### Retrieve All Events 
+
+**GET** method /events
+
+Body request example: 
+Not needed. 
+
+Response example: 
+```JSON
+[
+	{
+		"event_id": 1,
+		"title": "Winter is coming.",
+		"date": "2024-07-14",
+		"description": "A nice weekend in the cold Perisher Valley! For more info see the instagram page.",
+		"difficulty_level": 17,
+		"location": {
+			"name": "BlocHaus Bouldering Sydney",
+			"address": "49 Fitzroy St, Marrickville NSW 2204"
+		}
+	},
+	{
+		"event_id": 2,
+		"title": "Beginner Climbing Session",
+		"date": "2024-07-14",
+		"description": "A session for beginners to get started with climbing.",
+		"difficulty_level": 0,
+		"location": {
+			"name": "Perisher Valley",
+			"address": "-36.396624,148.405136"
+		}
+	}
+]
+
+```
+
+#### Retrieve One Event 
+
+**GET** method /events/{event_id}
+
+Body request: 
+Not needed 
+
+Response example: 
+```JSON 
+{
+	"event_id": 2,
+	"title": "Beginner Climbing Session",
+	"date": "2024-07-14",
+	"description": "A session for beginners to get started with climbing.",
+	"difficulty_level": 0,
+	"location": {
+		"name": "Perisher Valley",
+		"address": "-36.396624,148.405136"
+	}
+}
+```
+
+
+#### Create New Event
+ **POST** method /events 
+
+ Token required. 
+
+ Body request example: 
+ ```JSON
+{
+	"title":"Family's Day at Climbing Gym",
+	"description":"Bring your kids for a day of fun and games! Suitable for all ages and skill levels.",
+	"difficulty_level":0,
+	"location_id": 2,
+	"is_admin": true
+	
+}
+ ```
+
+ Response example: 
+ ```JSON
+{
+	"event_id": 3,
+	"title": "Family's Day at Climbing Gym",
+	"date": "2024-07-14",
+	"description": "Bring your kids for a day of fun and games! Suitable for all ages and skill levels.",
+	"difficulty_level": 0,
+	"location": {
+		"name": "BlocHaus Bouldering Sydney",
+		"address": "49 Fitzroy St, Marrickville NSW 2204"
+	}
+}
+ ```
+
+ #### Delete Event
+
+ Token required. 
+
+ **DEL** method /events/{event_id}
+
+Body request: 
+Not needed. 
+
+
+ ```JSON
+Response example: 
+
+ {
+	"message": "Event with id 2 deleted successfully."
+}
+ ```
+
+#### Edit Event
+
+Token required. 
+
+**PATCH** method /events/{event_id}
+
+Body request example: 
+```JSON
+{
+	"description":"UPDATED: because of heavy snow in the area the event is postponed. "
+}
+```
+
+Response example: 
+```JSON
+{
+	"event_id": 1,
+	"title": "Winter is coming.",
+	"date": "2024-07-14",
+	"description": "UPDATED: because of heavy snow in the area the event is postponed. ",
+	"difficulty_level": 17,
+	"location": {
+		"name": "Perisher Valley",
+		"address": "-36.396624,148.405136"
+	}
+}
+```
+
+#### Add Participant to Event
+
+Token required. 
+
+**POST** method /events/{event_id}/add_participant
+
+Body request example: 
+Not needed. 
+
+Response example: 
+```JSON
+{
+	"message": "User {username} added to event Winter is coming.."
+}
+```
+
+#### Remove participant to Event 
+
+Token required. 
+
+**DELETE** method /events/{event_id}/{user_id}/remove_participant 
+
+Body request: 
+Not needed. 
+
+Response example: 
+
+```JSON
+{
+	"message": "User Han Solo removed from event Winter is coming.."
+}
+```
+
+#### Get Participants To Event 
+
+Admin Token required. 
+
+**GET** method /events/{event_id}/participants
+
+Body request: 
+Not needed. 
+
+Response example: 
+
+```JSON
+{
+	"participants": [
+		"Han Solo"
+        "Jon Snow"
+
+	]
+}
+```
+

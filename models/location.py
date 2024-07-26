@@ -9,7 +9,6 @@ class Location(db.Model):
     name= db.Column(db.String,nullable=False)
     address=db.Column(db.String,nullable=False)
     difficulty_level= db.Column(db.Integer, nullable=False)
-    event_id= db.Column(db.Integer, db.ForeignKey("events.event_id"),nullable=False)
 
     events= db.relationship("Event", back_populates="location")
 
