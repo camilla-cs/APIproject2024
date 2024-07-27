@@ -55,7 +55,7 @@ def remove_participant(event_id, id):
     
     return {"message": f"User {user.username} removed from event {event.title}."}, 200
 
-#to get participants to event (only admin can perform this action)
+#to get all participants to an event (only admin can perform this action)
 @eventuser_bp.route("/<int:event_id>/participants", methods=["GET"])
 @jwt_required()
 def get_participants(event_id):

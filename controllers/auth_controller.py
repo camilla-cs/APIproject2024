@@ -12,6 +12,7 @@ from models.user import User, user_schema
 
 auth_bp = Blueprint("auth",__name__, url_prefix="/auth")
 
+#to register a new user
 @auth_bp.route("/register", methods=["POST"])
 def register_user(): 
     try: 
@@ -40,7 +41,7 @@ def register_user():
         if err.orig.pgcode == errorcodes.UNIQUE_VIOLATION:
             return {"error":"email address already in use"}, 409
 
-
+#to login a user
 @auth_bp.route("/login", methods=["POST"])
 def login_user():
     body_data = request.get_json()
