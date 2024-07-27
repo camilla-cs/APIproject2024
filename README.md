@@ -134,32 +134,32 @@ It's a library used to protect data and store them in a separate file.
 The database system used for this project is PostgreSQL. 
 
 ### Benefits: 
-#### it’s ACID compliant. 
+#### - it’s ACID compliant. 
 That means it follows the principles of : 
 - 1) Atomicity : the database ensures that either all the commands succeed or none at all. 
-- 2) Consistency : 
+- 2) Consistency : Guarantees that any transaction brings the database from one valid state to another, maintaining database invariants.
 - 3) Isolation: Transactions are executed in isolated environments to prevent interference. 
 - 4) Durability: Makes sure that once a transaction is committed, its changes persist even in case of failure. 
-#### supports advanced data type
+#### - supports advanced data type
 can handle JSON and also XML, it also allows to create custom functions, languages and more. This is why it’s also
-#### extensible. 
-#### supports audio, images and video. 
-#### strong security system with data encryption and advanced user authentication. 
-#### it’s able to perform efficiently even with complex queries. 
-#### it's able to handle multiple transactions at the same time. 
-#### it is open source with a large community that contributes to improve and to support. 
+#### - extensible. 
+#### - supports audio, images and video. 
+#### - strong security system with data encryption and advanced user authentication. 
+#### - it’s able to perform efficiently even with complex queries. 
+#### - it's able to handle multiple transactions at the same time. 
+#### - it is open source with a large community that contributes to improve and to support. 
 
 
 ### Drawbacks: 
-#### protection issues: 
+#### - protection issues: 
 the open-source feature can also be problematic because it doesn’t come with a warranty or protection. Moreover, because it’s managed by many communities, it may lack user-friendly features. 
-#### compability issues: 
+#### - compability issues: 
 Compatibility issues with some users tools or applications, requiring additional configuration. 
-#### slower
+#### - slow
 Slower performance compared to SQL Server and MySQL
-#### complex 
+#### - complex 
 can be complex for beginners. 
-#### memory usage 
+#### - memory usage 
 can have a substantial impact on memory and CPU usage, as a consequence, it requires powerful hardware. 
 
 ## R5 : ORM 
