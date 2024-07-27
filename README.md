@@ -292,7 +292,7 @@ In conclusion, the clear relationships between models make managing data more st
 
 ## R8: Application's Endpoints
 
-### Register New User
+### - Register New User
  This route allows to register a user's account in order to login. 
 
 **POST** method /auth/register
@@ -321,7 +321,7 @@ Response example:
  
  ```
 
-### Login 
+### - Login 
 This allows user and admin to login, it will also give a Token (valid temporary) necessary to user to create, delete or edit a post, and for admin to create, delete, modify events as well as seeing the events' participants. 
 
 **Login** method /auth/login 
@@ -344,7 +344,7 @@ Response example:
 }
 ```
 
-### Retrieve all posts
+### - Retrieve all posts
 
 This route allows us to retrieve information about the posts created.
 
@@ -378,7 +378,7 @@ Response example:
 
 ```
 
-### Create New Post
+### - Create New Post
 
 **POST** method /posts
 
@@ -405,7 +405,7 @@ Response example:
 }
 ```
 
-### Delete Post
+### - Delete Post
 
 Token of the user required. 
 
@@ -422,7 +422,7 @@ Response example:
 }
 
 ```
-### Edit Post
+### - Edit Post
 
 Token required. 
 
@@ -448,7 +448,7 @@ Response example:
 }
 ```
 
-### Retrieve All Events 
+### - Retrieve All Events 
 
 **GET** method /events
 
@@ -484,7 +484,7 @@ Response example:
 
 ```
 
-### Retrieve One Event 
+### - Retrieve One Event 
 
 **GET** method /events/{event_id}
 
@@ -507,7 +507,7 @@ Response example:
 ```
 
 
-### Create New Event
+### - Create New Event
  **POST** method /events 
 
  Token required. 
@@ -539,7 +539,7 @@ Response example:
 }
  ```
 
- ### Delete Event
+ ### - Delete Event
 
  Token required. 
 
@@ -558,7 +558,7 @@ Response example:
 }
  ```
 
-### Edit Event
+### - Edit Event
 
 Token required. 
 
@@ -586,7 +586,7 @@ Response example:
 }
 ```
 
-### Add Participant to Event
+### - Add Participant to Event
 
 Token required. 
 
@@ -602,7 +602,7 @@ Response example:
 }
 ```
 
-### Remove participant to Event 
+### - Remove participant to Event 
 
 Token required. 
 
@@ -619,7 +619,7 @@ Response example:
 }
 ```
 
-### Get Participants To Event 
+### - Get Participants To Event 
 
 Admin Token required. 
 
