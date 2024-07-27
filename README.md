@@ -64,21 +64,26 @@ GRANT ALL PRIVILEGES ON DATABASE database_name TO your_username;
 
 
 ## R1: Addressing the Problem 
-The intent behind this API project is to create a system for climbers to store rock climbing and bouldering routes, having the possibility to check the presence of any events and the possibility to create a community of climbing enthusiasts.
+The intent behind this API project is to create a system for climbers to store rock climbing and bouldering routes, easily check the presence of any events, and foster a community of climbing enthusiasts. 
 
-As a climber myself there are little events dedicated to climbers since most of them are being shared in closed forums or only in the gyms themselves. Moreover these informations are scattered in differe sites, making it difficult and more time consuming. 
-There is no single platform where climbers can find detailed information about different climbing locations, their difficulty levels, and upcoming events and often lack a solid community space to engage with fellow climbers, share experiences and participate in events. 
+As a climber, I have observed that there are few events dedicated to climbers, and most of them are shared in closed forums or only within the climbing gyms. Moreover, these informations are across different websites, making it difficult and time consuming. 
+There is no single platform where climbers can find detailed information about different climbing locations, their difficulty levels, and upcoming events. Additionally,climbers often lack a solid community space to engage with fellow climbers, share experiences and participate in events. 
 
-This API allows to retain information about the location, difficulty level of a location and users are allowed to create posts. 
-Admins can create events at different climbing locations, detailing the date and time of the event, and the different levels of experience required. Users can join or leave events and can decide whether to join an event by looking at the grade of difficulty.  
+This API aims to address these issues by centralizing information about climbing locations and events. It allows users to: 
+- retain detailed information about climbing locations, including the difficulty level. 
+- create posts to share their climbing experiences. 
+- view and join events created by admin. 
 
+Admins can create events at different climbing locations, detailing the date and time of the event, and the different levels of experience required. Users can join or leave events based on their interest and skill level.
+
+This API ensures data consistency and security through the use of SQLAlchemy for ORM. This allows efficient data querying and manipulation while maintaining data integrity. The API is designed to be scalable, handling a growing number of users and events. 
 
 ## R2: Tracking the tasks 
 
 [Trello Board](https://trello.com/b/0Xr1Krxi/t2a2-api-assignment)
 
-The tasks are tracked by using a kanban method in trello.com and organized them in : to do, doing and done. 
-The tasks were mainly organized before designing and coding the API, and some were added along the way. 
+The tasks are tracked by using a kanban method in 'trello.com' and organized them in : to do, doing and done. 
+The tasks were mainly organized before designing and coding the API.  
 
 First thing I focused on was the ERD diagram, essential for starting the coding part of the project. Then I divided the workload in three: I started coding the User and Post table, completing the models and controllers. I checked that the endpoints in Insomnia worked so I could do the same thing for Event, ClimbingLocation and the join table called UserEvent. 
 
@@ -543,9 +548,10 @@ Response example:
 Body request: 
 Not needed. 
 
+Response example:
 
  ```JSON
-Response example: 
+ 
 
  {
 	"message": "Event with id 2 deleted successfully."
