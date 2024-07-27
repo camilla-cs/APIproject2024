@@ -35,12 +35,33 @@ Please follow the steps below taking into consideration that were run on a MacOS
 
 6. Create a  separate .env file in the */src* folder and set your database URL and secret key based on the `.env.sample` file. 
 
-7. Make sure you have installed and run PostgreSQL in the terminal. In case you don't have postgreSQL installed, run this command in the terminal: 
-`pip install flask`
+7. Make sure you have installed PostgreSQL. In case you don't, check out this link on how to install it : [How to install psql](https://www.postgresql.org/download/). 
 
-7. Run `flask db create` to create the tables. 
-8. Run `flask db seed `.
-9. Run `flask run` to start the server on http://localhost:8080 
+8. Start PostgreSQL command line in the terminal : 
+```sh
+psql
+```
+9. Create a database: 
+```sql
+CREATE DATABASE database_name;
+```
+10. Create a new user and set the password: 
+```sql
+CREATE USER your_username WITH PASSWORD 'your_password'; 
+```
+11. Grant the privileges to the new user: 
+```sql
+GRANT ALL PRIVILEGES ON DATABASE database_name TO your_username; 
+```
+12. Exit psql by running \q and run `flask db create` to create the tables. 
+
+13. Run `flask db seed `.
+
+14. Run `flask run` to start the server. 
+
+15. To have a preconfigured folder of all endpoints, open the local scratch pad on Insomnia, click on 'Scratch Pad' on the top left and select 'Import'. After dowloading the following file  [Insomnia folder](/docs/Insomnia_2024-07-27.json) drop it in the 'Import' window. Or, if you want to test it on your own, jump into the 'R8: Application's Endpoints' section of this README file. 
+
+
 
 ## R1: Addressing the Problem 
 The intent behind this API project is to create a system for climbers to store rock climbing and bouldering routes, having the possibility to check the presence of any events and the possibility to create a community of climbing enthusiasts.
