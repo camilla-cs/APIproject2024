@@ -31,9 +31,9 @@ Please follow the steps below taking into consideration that were run on a MacOS
 
 4. Run `source .venv/bin/activate` to active the virtual environment. 
 
-5. To install all the required packages run `pip3 install -r requirements.txt` into your terminal. 
+5. Create a  separate .env file in the */src* folder and set your database URL and secret key based on the `.env.sample` file. 
 
-6. Create a  separate .env file in the */src* folder and set your database URL and secret key based on the `.env.sample` file. 
+6. To install all the required packages run `pip3 install -r requirements.txt` into your terminal. 
 
 7. Make sure you have installed PostgreSQL. In case you don't, check out this link on how to install it : [How to install psql](https://www.postgresql.org/download/). 
 
@@ -59,7 +59,7 @@ GRANT ALL PRIVILEGES ON DATABASE database_name TO your_username;
 
 14. Run `flask run` to start the server. 
 
-15. To have a preconfigured folder of all endpoints, open the local scratch pad on Insomnia, click on 'Scratch Pad' on the top left and select 'Import'. After dowloading the following file  [Insomnia folder](/docs/Insomnia_2024-07-27.json) drop it in the 'Import' window. Or, if you want to test it on your own, jump into the 'R8: Application's Endpoints' section of this README file. 
+15. To have a preconfigured folder of all endpoints, open the local scratch pad on Insomnia, click on 'Scratch Pad' on the top left and select 'Import'. After dowloading the following file  [Insomnia folder](/docs/Insomnia_2024-07-27.json) drop it in the 'Import' window. Or, if you want to test it on your own, jump into the [R8: Application's Endpoints](#r8-application's-endpoints) section of this README file. 
 
 
 
