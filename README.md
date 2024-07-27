@@ -195,7 +195,7 @@ Finally, one-to-many relationship takes place between 'Event' and 'Location' tab
 
 Each model has a separate file in the models folder and they are the following: 
 
-#### - User Model
+### - User Model
 ```python
 class User(db.Model): 
     __tablename__="users"
@@ -215,7 +215,7 @@ class User(db.Model):
 ```
 The **User model** represents the users table in the database and it relates to the **Post model** through a *one-to-many* relationship, but also to the **event model** with a *many-to-many* relationship that is taken care by a join table called **EventUser** . 
 
-#### - Post Model 
+### - Post Model 
 ```python
 class Post(db.Model):
     __tablename__ = "posts"
@@ -232,7 +232,7 @@ class Post(db.Model):
 ```
 The **Post model** contains the user_id as foreign key to link every post that has been created to its own owner, but you'll also be able to get information about the user's personal details such as *id*,*email* and *username*. 
 
-#### - Event Model
+### - Event Model
 ```python
 class Event (db.Model): 
     __tablename__="events"
@@ -252,7 +252,7 @@ class Event (db.Model):
 As we can see in the model above, only an admin can create an event, and there's also a foreign key called location_id that links this model to the **Location model** through a one-to-many relationship. 
 The admin can also retrieve information about the location details as well as the partecipants that are gonna join the event through the EventUser table as seen below. 
 
-#### - EventUser Model 
+### - EventUser Model 
 
 ```python
 #join-table between users and events 
@@ -266,7 +266,7 @@ class EventUser(db.Model):
 ```
 This join-table allow the admin to see to which event users will join and all the details not only about the event and the user, but also the location's ones. 
 
-#### - Location Model 
+### - Location Model 
 ```python
 class Location(db.Model): 
     __tablename__= "locations"
@@ -292,7 +292,7 @@ In conclusion, the clear relationships between models make managing data more st
 
 ## R8: Application's Endpoints
 
-#### Register New User
+### Register New User
  This route allows to register a user's account in order to login. 
 
 **POST** method /auth/register
@@ -321,7 +321,7 @@ Response example:
  
  ```
 
-#### Login 
+### Login 
 This allows user and admin to login, it will also give a Token (valid temporary) necessary to user to create, delete or edit a post, and for admin to create, delete, modify events as well as seeing the events' participants. 
 
 **Login** method /auth/login 
@@ -344,7 +344,7 @@ Response example:
 }
 ```
 
-#### Retrieve all posts
+### Retrieve all posts
 
 This route allows us to retrieve information about the posts created.
 
@@ -378,7 +378,7 @@ Response example:
 
 ```
 
-#### Create New Post
+### Create New Post
 
 **POST** method /posts
 
@@ -405,7 +405,7 @@ Response example:
 }
 ```
 
-#### Delete Post
+### Delete Post
 
 Token of the user required. 
 
@@ -422,7 +422,7 @@ Response example:
 }
 
 ```
-#### Edit Post
+### Edit Post
 
 Token required. 
 
@@ -448,7 +448,7 @@ Response example:
 }
 ```
 
-#### Retrieve All Events 
+### Retrieve All Events 
 
 **GET** method /events
 
@@ -484,7 +484,7 @@ Response example:
 
 ```
 
-#### Retrieve One Event 
+### Retrieve One Event 
 
 **GET** method /events/{event_id}
 
@@ -507,7 +507,7 @@ Response example:
 ```
 
 
-#### Create New Event
+### Create New Event
  **POST** method /events 
 
  Token required. 
@@ -539,7 +539,7 @@ Response example:
 }
  ```
 
- #### Delete Event
+ ### Delete Event
 
  Token required. 
 
@@ -558,7 +558,7 @@ Response example:
 }
  ```
 
-#### Edit Event
+### Edit Event
 
 Token required. 
 
@@ -586,7 +586,7 @@ Response example:
 }
 ```
 
-#### Add Participant to Event
+### Add Participant to Event
 
 Token required. 
 
@@ -602,7 +602,7 @@ Response example:
 }
 ```
 
-#### Remove participant to Event 
+### Remove participant to Event 
 
 Token required. 
 
@@ -619,7 +619,7 @@ Response example:
 }
 ```
 
-#### Get Participants To Event 
+### Get Participants To Event 
 
 Admin Token required. 
 
