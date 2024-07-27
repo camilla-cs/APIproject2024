@@ -59,7 +59,7 @@ GRANT ALL PRIVILEGES ON DATABASE database_name TO your_username;
 
 14. Run `flask run` to start the server. 
 
-15. To have a preconfigured folder of all endpoints, open the local scratch pad on Insomnia, click on 'Scratch Pad' on the top left and select 'Import'. After dowloading the following file  [Insomnia folder](/docs/Insomnia_2024-07-27.json) drop it in the 'Import' window. Or, if you want to test it on your own, jump into the [R8: Application's Endpoints](#r8-application's-endpoints) section of this README file. 
+15. To have a preconfigured folder of all endpoints, open the local scratch pad on Insomnia, click on 'Scratch Pad' on the top left and select 'Import'. After dowloading the following file  [Insomnia folder](/docs/Insomnia_2024-07-27.json) drop it in the 'Import' window. Or, if you want to test it on your own, jump into the 'R8: Application's Endpoints' section of this README file. 
 
 
 
