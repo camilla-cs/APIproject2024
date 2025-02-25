@@ -15,8 +15,8 @@ API webserver created for Coder Academy T2A2 assignment.
 - [R4: Benefits and drawback of the database's system](#r4-benefits-and-drawback-of-the-databases-system)
 - [R5: ORM](#r5-orm)
 - [R6: ERD](#r6-erd)
-- [R7: Models and database relationship](#r7-models-and-database-relationship)
-- [R8: Application's Endpoints](#r8-application's-endpoints)
+- [R7: Models and database relationship](#r7-models-and-database-relationships)
+- [R8: Application's Endpoints](#r8-applications-endpoints)
 
 
 ## API Setup
@@ -153,7 +153,7 @@ can be complex for beginners.
 #### - memory usage 
 can have a substantial impact on memory and CPU usage, as a consequence, it requires powerful hardware. 
 
-## R5 : ORM 
+## R5: ORM 
 The ORM language used for this project is SQLAlchemy.
 
 Object-relational mapping allows developers to convert data between the database and the programming language used, and is based on abstraction, through wich developers don't need to know SQL to generate SQL queries. 
