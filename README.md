@@ -89,16 +89,7 @@ First thing I focused on was the ERD diagram, essential for starting the coding 
 
 Then the last thing that remained was the documentation part and making sure I would meet all the requirements. 
 
-![trello screenshot 1](/docs/trello%201.png)
-![trello screenshot 2](/docs/trello%202.png)
-![trello screenshot 3](/docs/trello%203.png)
-![trello screenshot 4](/docs/trello%204.png)
-![trello screenshot 5](/docs/trello%205.png)
-![trello screenshot 6](/docs/trello%206.png)
-![trello screenshot 7](/docs/trello%207.png)
-![trello screenshot 8](/docs/trello%208.png)
-![trello screenshot 9](/docs/trello%209.png)
-![trello screenshot 10](/docs/trello%2010.png)
+
 ![trello screenshot 11](/docs/trello%2011.png)
 
 
